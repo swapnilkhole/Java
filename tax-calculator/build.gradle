@@ -1,0 +1,37 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id "java"
+}
+
+repositories {
+    mavenCentral()
+}
+
+group "cyb"
+version "1.0.0"
+apply plugin: 'eclipse'
+sourceCompatibility = 1.8
+
+dependencies {
+    testCompile "junit:junit:4.12"
+}
+
+task done(type: Zip) {
+    dependsOn "build"
+    from "./"
+    include "*/**"
+    exclude("build", "gradle", ".**", "gradlew", "gradlew.bat")
+    archiveName "tax-calculator-${System.env.USER}.zip"
+}
+
+task prepare(type: Zip) {
+    from "./"
+    include "*/**"
+    exclude("build", ".gradle", ".idea")
+    archiveName "tax-calculator.zip"
+}
